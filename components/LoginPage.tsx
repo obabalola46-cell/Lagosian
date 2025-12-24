@@ -30,8 +30,8 @@ const FuturisticBackground: React.FC = () => {
         }
       } catch (error) {
         console.error("AI Generation failed:", error);
-        // Fallback if API fails
-        setImageUrl("https://images.unsplash.com/photo-1542156822-6924d1a719c9?q=80&w=1600&auto=format&fit=crop");
+        // Robust High-Quality Night Lagos Asset
+        setImageUrl("https://images.unsplash.com/photo-1542156822-6924d1a719c9?auto=format&fit=crop&q=80&w=1600");
       } finally {
         setLoading(false);
       }
@@ -45,15 +45,17 @@ const FuturisticBackground: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#1e40af_0%,transparent_60%),radial-gradient(circle_at_bottom_left,#064e3b_0%,transparent_60%)] opacity-40"></div>
       <div className="absolute inset-0 opacity-[0.1]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-      {loading ? (
-        <div className="w-full h-full flex items-center justify-center bg-slate-900/50">
+      {loading && !imageUrl ? (
+        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-900/50 gap-4">
           <Loader2 className="text-blue-500 animate-spin" size={48} />
+          <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] animate-pulse">Initializing Cyber-City...</span>
         </div>
       ) : (
         <img 
           src={imageUrl || ''} 
           className="w-full h-full object-cover transition-opacity duration-1000 opacity-40 grayscale-[0.2]"
           alt="Lagos Skyline"
+          onLoad={() => setLoading(false)}
         />
       )}
 

@@ -190,7 +190,8 @@ const AdminAddEditArticle: React.FC<AdminAddEditArticleProps> = ({ onNavigate, a
                 </div>
                 <div className="p-6 bg-slate-950 rounded-3xl border border-white/5 space-y-2">
                    <div className="text-xl font-bold text-blue-400">{formData.title || 'Your Article Title Here'}</div>
-                   <div className="text-xs text-emerald-500 font-medium">lagosian.ng > news > {formData.slug || 'url-slug'}</div>
+                   {/* FIXED: Escaped > characters to prevent build error */}
+                   <div className="text-xs text-emerald-500 font-medium">lagosian.ng &gt; news &gt; {formData.slug || 'url-slug'}</div>
                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                      {formData.content || 'Start typing your content to see how it might appear in search engine results across the web.'}
                    </p>
