@@ -1,0 +1,7 @@
+{
+  "name": "Lagosian - Your Lagos Simplified",
+  "description": "A futuristic all-in-one digital platform for Lagosians to access government services, pay duties, and stay updated with verified news.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
