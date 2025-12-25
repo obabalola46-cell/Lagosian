@@ -113,11 +113,11 @@ const App: React.FC = () => {
       <main>
         {currentView === 'home' && (
           <>
-            <Hero />
+            <Hero onGetStarted={() => navigateTo('signup')} />
             <ProblemSection />
             <FeaturesSection onSeeAllFeatures={() => navigateTo('features')} />
             <NewsLandingSection onReadArticle={(id) => navigateTo('article', id)} onSeeAll={() => navigateTo('news')} />
-            <HowItWorks />
+            <HowItWorks onGetStarted={() => navigateTo('signup')} />
             <BenefitsSection />
             <StatsSection />
             <GovernmentSection />

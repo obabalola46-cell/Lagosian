@@ -1,63 +1,25 @@
 
-import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, ArrowLeft, LogIn, Chrome, Loader2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Eye, EyeOff, ArrowLeft, LogIn, Chrome, Home } from 'lucide-react';
 import { ViewType } from '../App';
 import Logo from './Logo';
-import { GoogleGenAI } from "@google/genai";
 
 interface LoginPageProps {
   onNavigate: (view: ViewType) => void;
 }
 
 const FuturisticBackground: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const generateBg = async () => {
-      try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-image',
-          contents: [{ parts: [{ text: 'Futuristic night view of Lagos city, Eko Atlantic area, cinematic lighting, neon blue and emerald green accents, hyper-realistic, 8k resolution, digital art style' }] }],
-        });
-
-        for (const part of response.candidates[0].content.parts) {
-          if (part.inlineData) {
-            setImageUrl(`data:image/png;base64,${part.inlineData.data}`);
-            break;
-          }
-        }
-      } catch (error) {
-        console.error("AI Generation failed:", error);
-        // Robust High-Quality Night Lagos Asset
-        setImageUrl("https://images.unsplash.com/photo-1542156822-6924d1a719c9?auto=format&fit=crop&q=80&w=1600");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    generateBg();
-  }, []);
-
   return (
     <div className="absolute inset-0 z-0 bg-slate-950 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#1e40af_0%,transparent_60%),radial-gradient(circle_at_bottom_left,#064e3b_0%,transparent_60%)] opacity-40"></div>
+      {/* Deep Space Gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#1e40af_0%,transparent_60%),radial-gradient(circle_at_bottom_left,#064e3b_0%,transparent_60%)] opacity-60"></div>
+      
+      {/* Tech Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.1]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-      {loading && !imageUrl ? (
-        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-900/50 gap-4">
-          <Loader2 className="text-blue-500 animate-spin" size={48} />
-          <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.3em] animate-pulse">Initializing Cyber-City...</span>
-        </div>
-      ) : (
-        <img 
-          src={imageUrl || ''} 
-          className="w-full h-full object-cover transition-opacity duration-1000 opacity-40 grayscale-[0.2]"
-          alt="Lagos Skyline"
-          onLoad={() => setLoading(false)}
-        />
-      )}
+      {/* Atmospheric Glows */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/5 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/20 z-10"></div>
     </div>
@@ -70,7 +32,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
   const [password, setPassword] = useState('');
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 animate-in fade-in duration-700 overflow-hidden bg-slate-950">
+    <div className="min-h-screen grid lg:grid-cols-2 animate-in fade-in duration-700 overflow-hidden bg-slate-950 relative">
+      {/* Return Home Button (Top Left) */}
+      <button 
+        onClick={() => onNavigate('home')}
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all group"
+      >
+        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+        <span className="text-xs font-black uppercase tracking-widest">Home</span>
+      </button>
+
       <div className="hidden lg:flex relative flex-col justify-between p-16 overflow-hidden">
         <FuturisticBackground />
         
@@ -106,7 +77,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('home')}
             >
               <Logo size={40} />
-              <span className="text-2xl font-extrabold tracking-tighter text-white">LAGOSIAN</span>
+              <span className="text-2xl font-extrabold tracking-tighter text-white uppercase">LAGOSIAN</span>
             </div>
             <h1 className="text-3xl font-black">Welcome back</h1>
           </div>
@@ -204,9 +175,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
           <div className="pt-8">
             <button 
               onClick={() => onNavigate('home')}
-              className="flex items-center gap-2 text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors mx-auto"
+              className="flex items-center gap-2 text-slate-500 hover:text-white text-xs font-black uppercase tracking-[0.2em] transition-colors mx-auto group"
             >
-              <ArrowLeft size={14} /> Back to Website
+              <Home size={14} className="group-hover:scale-110 transition-transform" /> Back to Landing Page
             </button>
           </div>
         </div>

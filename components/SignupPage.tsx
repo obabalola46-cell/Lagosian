@@ -1,58 +1,26 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, CheckCircle, Smartphone, ShieldCheck, Zap, ArrowRight, Mail, User, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Smartphone, ShieldCheck, Zap, ArrowRight, Mail, User, Lock, Eye, EyeOff, Home } from 'lucide-react';
 import { ViewType } from '../App';
 import Logo from './Logo';
-import { GoogleGenAI } from "@google/genai";
 
 interface SignupPageProps {
   onNavigate: (view: ViewType) => void;
 }
 
-const AIDynamicSignupBackground: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const generateBg = async () => {
-      try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-image',
-          contents: [{ parts: [{ text: 'Futuristic day view of Lagos, sunlight, high-tech glass skyscrapers, digital connectivity lines in the air, green energy, bright and optimistic palette, high resolution, digital art style' }] }],
-        });
-
-        for (const part of response.candidates[0].content.parts) {
-          if (part.inlineData) {
-            setImageUrl(`data:image/png;base64,${part.inlineData.data}`);
-            break;
-          }
-        }
-      } catch (error) {
-        console.error("AI Generation failed:", error);
-        setImageUrl("https://images.unsplash.com/photo-1542156822-6924d1a719c9?q=80&w=1600&auto=format&fit=crop");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    generateBg();
-  }, []);
-
+const FuturisticSignupBackground: React.FC = () => {
   return (
-    <div className="absolute inset-0 z-0 bg-slate-950">
-      <div className="absolute inset-0 bg-emerald-900/40 mix-blend-multiply z-10"></div>
-      {loading ? (
-        <div className="w-full h-full flex items-center justify-center bg-slate-900">
-          <Loader2 className="text-emerald-500 animate-spin" size={48} />
-        </div>
-      ) : (
-        <img 
-          src={imageUrl || ''} 
-          className="w-full h-full object-cover grayscale-[0.2] transition-opacity duration-1000"
-          alt="Lagos Day Skyline"
-        />
-      )}
+    <div className="absolute inset-0 z-0 bg-slate-950 overflow-hidden">
+      {/* Emerald and Teal Gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,#064e3b_0%,transparent_60%),radial-gradient(circle_at_top_left,#065f46_0%,transparent_60%)] opacity-40"></div>
+      <div className="absolute inset-0 bg-emerald-900/10 mix-blend-multiply"></div>
+      
+      {/* Tech Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+
+      {/* Atmospheric Glows */}
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full animate-pulse"></div>
+      
       <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-transparent to-transparent opacity-80 z-10"></div>
     </div>
   );
@@ -108,9 +76,18 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 animate-in fade-in duration-700 overflow-hidden">
+    <div className="min-h-screen grid lg:grid-cols-2 animate-in fade-in duration-700 overflow-hidden relative">
+      {/* Return Home Button (Top Left) */}
+      <button 
+        onClick={() => onNavigate('home')}
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all group"
+      >
+        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+        <span className="text-xs font-black uppercase tracking-widest">Home</span>
+      </button>
+
       <div className="hidden lg:flex relative bg-slate-950 flex-col justify-between p-16 overflow-hidden">
-        <AIDynamicSignupBackground />
+        <FuturisticSignupBackground />
         
         <div className="relative z-10">
           <div 
@@ -353,9 +330,9 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
             <div className="pt-4">
               <button 
                 onClick={() => onNavigate('home')}
-                className="flex items-center gap-2 text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors mx-auto"
+                className="flex items-center gap-2 text-slate-500 hover:text-white text-xs font-black uppercase tracking-[0.2em] transition-colors mx-auto group"
               >
-                <ArrowLeft size={14} /> Back to Website
+                <Home size={14} className="group-hover:scale-110 transition-transform" /> Back to Landing Page
               </button>
             </div>
           </div>

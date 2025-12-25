@@ -2,7 +2,11 @@
 import React from 'react';
 import { Play, CheckCircle, Smartphone } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onGetStarted?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +31,10 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 hover:shadow-blue-500/20 hover:shadow-2xl transition-all transform hover:-translate-y-1">
+              <button 
+                onClick={onGetStarted}
+                className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 hover:shadow-blue-500/20 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+              >
                 Get Started — It's Free
               </button>
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">

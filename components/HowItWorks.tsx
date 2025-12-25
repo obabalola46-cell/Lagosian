@@ -2,7 +2,11 @@
 import React from 'react';
 import { UserPlus, ClipboardCheck, Zap } from 'lucide-react';
 
-const HowItWorks: React.FC = () => {
+interface HowItWorksProps {
+  onGetStarted?: () => void;
+}
+
+const HowItWorks: React.FC<HowItWorksProps> = ({ onGetStarted }) => {
   const steps = [
     {
       number: '01',
@@ -58,7 +62,10 @@ const HowItWorks: React.FC = () => {
 
         <div className="mt-20 text-center space-y-6">
           <p className="text-xl text-slate-300 font-semibold">Ready to simplify your Lagos life?</p>
-          <button className="px-10 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 shadow-xl shadow-blue-500/20 transition-all">
+          <button 
+            onClick={onGetStarted}
+            className="px-10 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 shadow-xl shadow-blue-500/20 transition-all"
+          >
             Create Free Account
           </button>
         </div>
