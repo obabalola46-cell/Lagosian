@@ -56,12 +56,15 @@ import AdminSignupPage from './components/AdminSignupPage';
 import AdminUserManagement from './components/AdminUserManagement';
 import AdminContentManagement from './components/AdminContentManagement';
 import AdminAddEditArticle from './components/AdminAddEditArticle';
+import WalletPage from './components/WalletPage';
+import BRTPayPage from './components/BRTPayPage';
 
 export type ViewType = 
   | 'home' | 'features' | 'about' | 'contact' | 'help' | 'news' | 'article' | 'download' 
   | 'login' | 'signup' | 'forgot-password' | 'reset-password'
   | 'dashboard' | 'registration-hub' | 'my-registrations' | 'payments' | 'make-payment' | 'payment-form' | 'payment-processing' | 'payment-success' | 'payment-failed' | 'transaction-history' | 'profile' | 'receipt' | 'dashboard-news' | 'edit-profile' | 'lagosian-id' | 'my-documents' | 'settings' | 'notification-settings' | 'security-settings' | 'dashboard-help' | 'admin-dashboard' | 'admin-login' | 'admin-signup' | 'admin-users' | 'admin-content' | 'admin-edit-content'
-  | 'nin-verify' | 'tax-register' | 'lasrra-register' | 'lawma-register' | 'registration-details';
+  | 'nin-verify' | 'tax-register' | 'lasrra-register' | 'lawma-register' | 'registration-details'
+  | 'wallet' | 'brt-pay';
 
 const DASHBOARD_VIEWS = new Set<ViewType>([
   'dashboard', 'registration-hub', 'my-registrations', 'payments', 
@@ -69,7 +72,8 @@ const DASHBOARD_VIEWS = new Set<ViewType>([
   'payment-failed', 'transaction-history', 'profile', 'receipt', 
   'dashboard-news', 'edit-profile', 'lagosian-id', 'my-documents', 
   'settings', 'notification-settings', 'security-settings', 'dashboard-help', 
-  'nin-verify', 'tax-register', 'lasrra-register', 'lawma-register', 'registration-details'
+  'nin-verify', 'tax-register', 'lasrra-register', 'lawma-register', 'registration-details',
+  'wallet', 'brt-pay'
 ]);
 
 const AUTH_VIEWS = new Set<ViewType>(['login', 'signup', 'forgot-password', 'reset-password', 'admin-login', 'admin-signup']);
@@ -177,6 +181,8 @@ const App: React.FC = () => {
             {currentView === 'tax-register' && <TaxRegistration onNavigate={navigateTo} />}
             {currentView === 'lasrra-register' && <LASRRARegistration onNavigate={navigateTo} />}
             {currentView === 'lawma-register' && <LAWMARegistration onNavigate={navigateTo} />}
+            {currentView === 'wallet' && <WalletPage onNavigate={navigateTo} />}
+            {currentView === 'brt-pay' && <BRTPayPage onNavigate={navigateTo} />}
           </DashboardLayout>
         )}
       </main>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserCheck, CreditCard, Bell, ChevronRight } from 'lucide-react';
+import { UserCheck, CreditCard, Bell, ChevronRight, Bus } from 'lucide-react';
 
 interface FeaturesSectionProps {
   onSeeAllFeatures?: () => void;
@@ -23,6 +23,20 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onSeeAllFeatures }) =
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000'
     },
     {
+      title: 'Digital Transit',
+      subtitle: 'Tap to Pay on BRT & Trains',
+      description: 'The futuristic way to move around Lagos. Link your Lagos Move transit card to your Lagosian wallet and pay for bus and train rides with a single tap.',
+      points: [
+        'Virtual Transit Card in your pocket',
+        'Contactless payments for BRT & Metro',
+        'Real-time trip history tracking',
+        'Auto-topup when balance is low'
+      ],
+      icon: <Bus className="text-emerald-500" size={24} />,
+      image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1000',
+      reverse: true
+    },
+    {
       title: 'Unified Payments',
       subtitle: 'Pay All Lagos Duties in One Place',
       description: 'From tax payments to LAWMA bills to Land Use Charge — view all your obligations and pay instantly with your preferred method.',
@@ -32,22 +46,8 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onSeeAllFeatures }) =
         'Automated payment reminders',
         'Digital receipts & transaction history'
       ],
-      icon: <CreditCard className="text-emerald-500" size={24} />,
-      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=1000',
-      reverse: true
-    },
-    {
-      title: 'Verified Updates',
-      subtitle: 'Stay Informed, Stay Ahead',
-      description: 'Get real-time Lagos news and government announcements tailored to your location. No more fake news or missed important updates.',
-      points: [
-        'Verified government announcements',
-        'Location-based news (by LGA)',
-        'Traffic and emergency alerts',
-        'Personalized notification settings'
-      ],
-      icon: <Bell className="text-amber-500" size={24} />,
-      image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1000'
+      icon: <CreditCard className="text-indigo-500" size={24} />,
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=1000'
     }
   ];
 

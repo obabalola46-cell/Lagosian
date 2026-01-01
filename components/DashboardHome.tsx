@@ -16,7 +16,9 @@ import {
   Car,
   HeartPulse,
   Wallet,
-  CalendarDays
+  CalendarDays,
+  Bus,
+  Plus
 } from 'lucide-react';
 import { ViewType } from '../App';
 
@@ -26,16 +28,8 @@ interface DashboardHomeProps {
 
 const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
   const now = new Date();
-  // We'll simulate the "current" year as 2026 for the UI
   const formattedDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).replace('2025', '2026').replace('2024', '2026');
   const formattedTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-  const upcomingFeatures = [
-    { title: 'Vehicle Registration', date: 'Q3 2026', icon: <Car className="text-blue-400" />, desc: 'Renew papers and register new vehicles digitally.' },
-    { title: 'Health Wallet', date: 'Q4 2026', icon: <HeartPulse className="text-emerald-400" />, desc: 'Unified health records and state health insurance access.' },
-    { title: 'Smart Wallet', date: 'Q4 2026', icon: <Wallet className="text-amber-400" />, desc: 'Direct funding and one-tap utility payments.' },
-    { title: 'Lagos Events Hub', date: 'Q1 2027', icon: <CalendarDays className="text-indigo-400" />, desc: 'Official state events, festivals, and university/venue bookings.' },
-  ];
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -51,48 +45,42 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8">
-        {/* Lagosian ID Card */}
+        {/* Interactive Wallet Card (Lagosian Pay) */}
         <div className="lg:col-span-1">
           <div className="relative group perspective">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative bg-gradient-to-br from-slate-900 to-blue-950 p-8 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl h-[420px] flex flex-col justify-between">
-              {/* Card Hologram Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 p-8 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl h-[420px] flex flex-col justify-between">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
               
               <div className="flex justify-between items-start relative z-10">
                 <div className="space-y-1">
-                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Lagosian Digital ID</div>
-                  <div className="text-xl font-black text-white">LAG-2026-88923</div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">Lagosian Smart Wallet</div>
+                  <div className="text-sm font-bold text-white/80">SEUN BABALOLA</div>
                 </div>
                 <div className="w-12 h-12 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center">
-                  <QrCode className="text-white/40" size={28} />
+                  <Wallet className="text-white/40" size={24} />
                 </div>
               </div>
 
-              <div className="flex items-end gap-6 relative z-10">
-                <div className="w-24 h-24 rounded-2xl bg-slate-800 border-2 border-white/10 overflow-hidden shrink-0">
-                  <img 
-                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" 
-                    className="w-full h-full object-cover" 
-                    alt="Profile"
-                  />
-                </div>
-                <div className="pb-2 space-y-1">
-                  <h3 className="text-2xl font-black text-white leading-tight">Seun Babalola</h3>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
-                    <CheckCircle2 size={12} /> Verified Resident
-                  </div>
-                </div>
+              <div className="relative z-10 space-y-2">
+                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">Available Balance</div>
+                 <div className="text-5xl font-black text-white tracking-tighter">₦25,000.00</div>
+                 <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase">
+                    <CheckCircle2 size={10} /> Account Healthy
+                 </div>
               </div>
 
-              <div className="pt-6 border-t border-white/10 flex justify-between items-center relative z-10">
-                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Expires: 12/2029</div>
+              <div className="space-y-3 relative z-10">
                 <button 
-                  onClick={() => onNavigate('lagosian-id')}
-                  className="flex items-center gap-2 text-xs font-black text-blue-400 hover:text-white transition-colors"
+                  onClick={() => onNavigate('wallet')}
+                  className="w-full py-4 bg-white text-indigo-950 font-black text-xs rounded-2xl hover:bg-slate-100 transition-all flex items-center justify-center gap-2"
                 >
-                  View Full ID <ArrowUpRight size={14} />
+                  <Plus size={16} /> Fund My Wallet
                 </button>
+                <div className="flex justify-between items-center px-1 text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+                   <span>Auto-Topup: Enabled</span>
+                   <button onClick={() => onNavigate('wallet')} className="text-blue-500">Settings</button>
+                </div>
               </div>
             </div>
           </div>
@@ -101,20 +89,28 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
         {/* Quick Actions & Pending */}
         <div className="lg:col-span-2 space-y-8">
           <div>
-            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-4 ml-1">Quick Actions</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-4 ml-1">Daily Mobility & Pay</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
+                { name: 'BRT Tap to Pay', icon: <Bus className="text-emerald-400" />, view: 'brt-pay' as const, hot: true },
                 { name: 'New Registration', icon: <FileText className="text-blue-400" />, view: 'registration-hub' as const },
-                { name: 'Make Payment', icon: <CreditCard className="text-emerald-400" />, view: 'make-payment' as const },
-                { name: 'View Updates', icon: <Newspaper className="text-amber-400" />, view: 'news' as const },
-                { name: 'Get Help', icon: <HelpCircle className="text-indigo-400" />, view: 'help' as const },
+                { name: 'Unified Tax', icon: <CreditCard className="text-indigo-400" />, view: 'make-payment' as const },
+                { name: 'Ikeja Feed', icon: <Newspaper className="text-amber-400" />, view: 'news' as const },
               ].map((action, i) => (
                 <button 
                   key={i} 
                   onClick={() => onNavigate(action.view)}
-                  className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all group flex flex-col items-center gap-4 text-center"
+                  className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all group flex flex-col items-center gap-4 text-center relative overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg">
+                  {action.hot && (
+                    <div className="absolute top-0 right-0 p-2">
+                       <span className="flex h-2 w-2 relative">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                    </div>
+                  )}
+                  <div className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg group-hover:rotate-3">
                     {action.icon}
                   </div>
                   <span className="text-xs font-bold text-slate-300">{action.name}</span>
@@ -124,41 +120,44 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
           </div>
 
           <div>
-            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-4 ml-1">Pending Actions (2)</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-4 ml-1">Lagos Live Alerts</h3>
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-6 rounded-3xl bg-amber-500/5 border border-amber-500/20 flex gap-5 group cursor-pointer hover:bg-amber-500/10 transition-all" onClick={() => onNavigate('payment-form')}>
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0">
-                  <AlertCircle size={24} />
+              <div className="p-6 rounded-3xl bg-emerald-500/5 border border-emerald-500/20 flex gap-5 group cursor-pointer hover:bg-emerald-500/10 transition-all" onClick={() => onNavigate('brt-pay')}>
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
+                  <Bus size={24} />
                 </div>
                 <div className="flex-1 space-y-3">
                   <div>
-                    <h4 className="font-bold text-white">LAWMA Payment Due</h4>
-                    <p className="text-xs text-slate-400 mt-1">Q2 2026 payment of ₦5,000</p>
-                    <div className="text-[10px] font-black text-amber-400 uppercase tracking-widest mt-2">Due in 3 days</div>
+                    <h4 className="font-bold text-white">BRT Transit Active</h4>
+                    <p className="text-xs text-slate-400 mt-1">Bus ready at Ikeja terminal for TBS route.</p>
+                    <div className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mt-2 flex items-center gap-1.5">
+                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                       5 mins away
+                    </div>
                   </div>
                   <button 
-                    onClick={() => onNavigate('payment-form')}
-                    className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl transition-all"
+                    onClick={() => onNavigate('brt-pay')}
+                    className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs rounded-xl transition-all"
                   >
-                    Pay Now
+                    Open NFC Tap
                   </button>
                 </div>
               </div>
 
-              <div className="p-6 rounded-3xl bg-blue-500/5 border border-blue-500/20 flex gap-5 group cursor-pointer hover:bg-blue-500/10 transition-all" onClick={() => onNavigate('tax-register')}>
+              <div className="p-6 rounded-3xl bg-blue-500/5 border border-blue-500/20 flex gap-5 group cursor-pointer hover:bg-blue-500/10 transition-all" onClick={() => onNavigate('dashboard-news')}>
                 <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
-                  <FileText size={24} />
+                  <Zap size={24} />
                 </div>
                 <div className="flex-1 space-y-3">
                   <div>
-                    <h4 className="font-bold text-white">Complete Tax Registration</h4>
-                    <p className="text-xs text-slate-400 mt-1">2 steps remaining (Document Upload)</p>
+                    <h4 className="font-bold text-white">Bridge Work Update</h4>
+                    <p className="text-xs text-slate-400 mt-1">Maintenance on 3rd Mainland concludes early.</p>
                   </div>
                   <button 
-                    onClick={() => onNavigate('tax-register')}
+                    onClick={() => onNavigate('dashboard-news')}
                     className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl transition-all"
                   >
-                    Continue
+                    Read Status
                   </button>
                 </div>
               </div>
@@ -168,27 +167,26 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10">
-        {/* Registration Status */}
+        {/* Recent Activity */}
         <div className="space-y-6">
           <div className="flex items-center justify-between px-1">
-            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">My Registrations</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">My Lagosian Activity</h3>
             <button 
-              onClick={() => onNavigate('my-registrations')}
+              onClick={() => onNavigate('transaction-history')}
               className="text-xs font-bold text-blue-400 hover:underline"
             >
-              View All
+              All Activity
             </button>
           </div>
           <div className="space-y-3">
             {[
-              { name: 'Tax (LIRS)', status: 'Incomplete', info: 'Draft saved: 2 days ago', icon: <FileText className="text-amber-500" />, view: 'tax-register' as const },
-              { name: 'Resident (LASRRA)', status: 'Incomplete', info: 'Draft saved: Today', icon: <Clock className="text-blue-500" />, view: 'lasrra-register' as const },
-              { name: 'LAWMA Waste', status: 'Incomplete', info: 'Action Required', icon: <AlertCircle className="text-amber-500" />, view: 'lawma-register' as const },
+              { name: 'BRT: Ikeja - TBS', status: 'Debited', info: 'Today, 08:30 AM', icon: <Bus className="text-emerald-500" />, amt: '- ₦500' },
+              { name: 'Tax Compliance (LIRS)', status: 'Active', info: 'Jan 10, 2026', icon: <FileText className="text-blue-500" />, amt: '' },
+              { name: 'LAWMA Q2 2026', status: 'Payment Due', info: 'Action Required', icon: <AlertCircle className="text-amber-500" />, amt: '₦5,000' },
             ].map((reg, i) => (
               <div 
                 key={i} 
-                onClick={() => onNavigate(reg.view)}
-                className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/[0.07] transition-all group cursor-pointer"
+                className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/[0.07] transition-all group"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
@@ -199,23 +197,24 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
                     <div className="text-[10px] text-slate-500 font-medium uppercase tracking-widest">{reg.info}</div>
                   </div>
                 </div>
-                <div className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${reg.status === 'Registered' || reg.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-blue-500/10 text-blue-500'}`}>
-                  {reg.status}
+                <div className="text-right">
+                   <div className={`px-2 py-0.5 rounded text-[8px] font-black uppercase mb-1 ${reg.status === 'Debited' ? 'text-rose-400' : 'text-blue-400'}`}>{reg.status}</div>
+                   <div className="font-black text-white text-sm">{reg.amt}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Recent Transactions */}
+        {/* Recent Transactions Table Component (Previously Added) */}
         <div className="space-y-6">
           <div className="flex items-center justify-between px-1">
-            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">Recent Transactions</h3>
+            <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">Wallet Log</h3>
             <button 
-              onClick={() => onNavigate('payments')}
+              onClick={() => onNavigate('wallet')}
               className="text-xs font-bold text-blue-400 hover:underline"
             >
-              Full History
+              Full Log
             </button>
           </div>
           <div className="bg-white/5 border border-white/5 rounded-3xl overflow-hidden shadow-xl">
@@ -223,87 +222,25 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ onNavigate }) => {
               <thead>
                 <tr className="border-b border-white/5 bg-white/[0.02]">
                   <th className="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Date</th>
-                  <th className="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Description</th>
+                  <th className="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Action</th>
                   <th className="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Amount</th>
-                  <th className="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {[
-                  { date: 'Jun 10', desc: 'LAWMA Q1 2026', amt: '₦5,000', status: 'Paid' },
-                  { date: 'May 15', desc: 'LIRS Annual', amt: '₦45,000', status: 'Paid' },
-                  { date: 'May 1', desc: 'Wallet Top-up', amt: '₦50,000', status: 'Complete' },
+                  { date: 'Jun 15', desc: 'Auto Top-up (Visa)', amt: '+₦5,000' },
+                  { date: 'Jun 14', desc: 'BRT Trip: Ikeja', amt: '-₦350' },
+                  { date: 'Jun 12', desc: 'Wallet Funding', amt: '+₦20,000' },
                 ].map((tx, i) => (
-                  <tr key={i} className="hover:bg-white/[0.02] transition-colors group cursor-pointer" onClick={() => onNavigate('payments')}>
-                    <td className="px-6 py-4 text-slate-400">{tx.date}</td>
-                    <td className="px-6 py-4 font-bold text-slate-200 group-hover:text-white transition-colors">{tx.desc}</td>
-                    <td className="px-6 py-4 font-black text-white">{tx.amt}</td>
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1.5 text-emerald-400 font-bold text-xs">
-                        <CheckCircle2 size={14} /> {tx.status}
-                      </span>
-                    </td>
+                  <tr key={i} className="hover:bg-white/[0.02] transition-colors group cursor-pointer" onClick={() => onNavigate('wallet')}>
+                    <td className="px-6 py-4 text-slate-400 font-bold">{tx.date}</td>
+                    <td className="px-6 py-4 text-slate-300">{tx.desc}</td>
+                    <td className={`px-6 py-4 font-black ${tx.amt.startsWith('+') ? 'text-emerald-400' : 'text-white'}`}>{tx.amt}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-
-      {/* Upcoming Features Section */}
-      <div className="space-y-6 pt-4">
-        <div className="flex items-center justify-between px-1">
-          <div className="flex items-center gap-3">
-             <Sparkles className="text-blue-500" size={18} />
-             <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">Future of Lagosian</h3>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {upcomingFeatures.map((feat, i) => (
-            <div key={i} className="p-6 rounded-[2.5rem] bg-white/[0.02] border border-white/5 border-dashed hover:border-blue-500/20 transition-all group">
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center transition-transform group-hover:scale-110">
-                  {feat.icon}
-                </div>
-                <div className="text-[9px] font-black text-blue-500/60 uppercase tracking-widest bg-blue-500/5 px-2 py-1 rounded-lg">
-                  {feat.date}
-                </div>
-              </div>
-              <h4 className="font-bold text-slate-200 mb-2">{feat.title}</h4>
-              <p className="text-xs text-slate-500 leading-relaxed">{feat.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Latest Updates */}
-      <div className="space-y-6 pt-4">
-        <div className="flex items-center justify-between px-1">
-          <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">Latest Updates</h3>
-          <button onClick={() => onNavigate('news')} className="text-xs font-bold text-blue-400 hover:underline flex items-center gap-1">
-            View All Updates <ChevronRight size={14} />
-          </button>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { id: 1, cat: 'Traffic', title: 'Third Mainland Bridge Maintenance Completed', date: 'Today', img: 'https://images.unsplash.com/photo-1542156822-6924d1a719c9?auto=format&fit=crop&q=80&w=400' },
-            { id: 2, cat: 'LIRS', title: 'New Digital Tax Incentives for Small Businesses', date: 'Yesterday', img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400' },
-            { id: 3, cat: 'Gov', title: 'Lagos State to launch Eco-Friendly Bus Initiative', date: formattedDate, img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400' },
-          ].map((news, i) => (
-            <div key={i} className="glass rounded-[2rem] overflow-hidden border border-white/10 hover:border-blue-500/30 transition-all group cursor-pointer" onClick={() => onNavigate('news')}>
-              <div className="h-40 overflow-hidden relative">
-                <img src={news.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
-                <div className="absolute top-4 left-4 bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg shadow-blue-500/20">
-                  {news.cat}
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">{news.date}</div>
-                <h4 className="font-bold text-slate-200 group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">{news.title}</h4>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

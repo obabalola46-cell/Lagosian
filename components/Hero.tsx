@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Play, CheckCircle, Smartphone } from 'lucide-react';
+/* Added CreditCard to imports */
+import { Play, CheckCircle, Bus, CreditCard } from 'lucide-react';
 
 interface HeroProps {
   onGetStarted?: () => void;
@@ -27,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
             </h1>
 
             <p className="text-lg lg:text-xl text-slate-400 max-w-xl leading-relaxed">
-              Register for government services, pay your Lagos duties, and stay updated with verified news — all in one place. Join 10,000+ Lagosians simplifying their civic life.
+              Register for government services, pay your Lagos duties, and stay updated with verified news. Now with <span className="text-emerald-400 font-bold">Lagos Move</span> — tap to pay on BRT buses and trains.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -46,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
             <div className="flex flex-wrap items-center gap-6 pt-4">
               {[
                 { label: 'Free to use' },
-                { label: 'Secure & Private' },
+                { label: 'Transit Ready' },
                 { label: 'Government Aligned' }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 text-slate-400 text-sm">
@@ -66,41 +67,44 @@ const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
                 {/* Mockup Content */}
                 <div className="p-6 h-full flex flex-col gap-4">
                   <div className="flex justify-between items-center pb-4 border-b border-white/5">
-                    <div className="text-xs text-slate-500">Welcome, Tunde</div>
-                    <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-[10px] text-blue-400 font-bold">TB</div>
+                    <div className="text-xs text-slate-500 font-bold uppercase tracking-widest">Lagosian Pay</div>
+                    <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-[10px] text-blue-400 font-bold">SB</div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-4 rounded-2xl space-y-2">
-                    <div className="text-[10px] text-blue-100/60 font-medium">Lagosian Digital ID</div>
-                    <div className="text-lg font-bold">LAS-9823-QRT</div>
-                    <div className="w-full h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                      <div className="w-10/12 h-4 bg-white/20 rounded"></div>
+                  <div className="bg-gradient-to-br from-emerald-600 to-teal-800 p-4 rounded-2xl space-y-3 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-2 opacity-10"><Bus size={48} /></div>
+                    <div className="text-[10px] text-emerald-100/60 font-medium uppercase tracking-widest">Lagos Move Transit</div>
+                    <div className="text-2xl font-black text-white">₦25,000.00</div>
+                    <div className="flex justify-between items-center">
+                       <span className="text-[8px] font-black text-white/50 uppercase">Ready to Tap</span>
+                       <span className="text-[8px] font-black text-white/50 uppercase tracking-widest">ID: 88123</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { icon: '💰', label: 'Payments' },
-                      { icon: '📄', label: 'Docs' },
-                      { icon: '📰', label: 'News' },
-                      { icon: '⚖️', label: 'Tax' },
+                      { icon: <Bus size={18} />, label: 'Transit' },
+                      { icon: <CreditCard size={18} />, label: 'Tax' },
+                      { icon: <CheckCircle size={18} />, label: 'ID' },
+                      { icon: <Play size={18} />, label: 'Services' },
                     ].map((item, idx) => (
-                      <div key={idx} className="bg-white/5 border border-white/10 p-3 rounded-xl flex flex-col items-center gap-2">
-                        <span className="text-lg">{item.icon}</span>
-                        <span className="text-[10px] text-slate-400 font-bold">{item.label}</span>
+                      <div key={idx} className="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col items-center gap-2">
+                        <span className="text-blue-400">{item.icon}</span>
+                        <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{item.label}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-auto pt-4">
-                    <div className="text-[10px] text-slate-500 font-bold mb-2">RECENT NOTIFICATIONS</div>
-                    <div className="space-y-2">
-                      <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-[9px] text-emerald-400">
-                        LAWMA Bill Paid Successfully
-                      </div>
-                      <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-[9px] text-blue-400">
-                        New Traffic Alert: Third Mainland Bridge
-                      </div>
+                  <div className="mt-auto pt-4 space-y-3">
+                    <div className="text-[10px] text-slate-600 font-black uppercase tracking-widest">UPCOMING RIDE</div>
+                    <div className="p-3 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
+                       <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                          <Bus size={14} />
+                       </div>
+                       <div className="flex-1">
+                          <div className="text-[10px] font-bold text-white uppercase leading-tight">TBS Terminal</div>
+                          <div className="text-[8px] text-slate-500 uppercase font-black">5 mins away</div>
+                       </div>
                     </div>
                   </div>
                 </div>
@@ -108,14 +112,14 @@ const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
             </div>
 
             {/* Floating UI Elements */}
-            <div className="absolute top-1/4 -right-4 lg:right-0 bg-slate-900/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl animate-bounce" style={{animationDuration: '3s'}}>
+            <div className="absolute top-1/4 -right-4 lg:right-0 bg-slate-900/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl animate-bounce" style={{animationDuration: '3.5s'}}>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-500">
-                  ₦
+                  <Bus size={16} />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 font-bold uppercase tracking-tighter">Duty Paid</div>
-                  <div className="text-sm font-bold text-emerald-400">₦2,500 LAWMA</div>
+                  <div className="text-xs text-slate-500 font-black uppercase tracking-widest">Transit Tap</div>
+                  <div className="text-sm font-bold text-emerald-400">₦450 CMS → TBS</div>
                 </div>
               </div>
             </div>
@@ -126,8 +130,8 @@ const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
                   <CheckCircle size={16} />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 font-bold uppercase tracking-tighter">Verified</div>
-                  <div className="text-sm font-bold text-blue-400">NIN Verified</div>
+                  <div className="text-xs text-slate-500 font-black uppercase tracking-widest">Wallet Status</div>
+                  <div className="text-sm font-bold text-blue-400">Funded & Secure</div>
                 </div>
               </div>
             </div>
